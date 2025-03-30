@@ -27,53 +27,53 @@ export default function Home() {
 
   const styles: StyleOption[] = [
     {
-      id: "impressionism",
-      name: "Impressionism",
-      image: "/placeholder.svg?height=300&width=300",
+      id: "ghibli",
+      name: "Studio Ghibli Style",
+      image: "/covers/ghibli.jpg",
       color: "bg-blue-500",
     },
     {
-      id: "cubism",
-      name: "Cubism",
-      image: "/placeholder.svg?height=300&width=300",
+      id: "timBurton",
+      name: "Tim Burton Style",
+      image: "",
       color: "bg-purple-500",
     },
     {
-      id: "surrealism",
-      name: "Surrealism",
-      image: "/placeholder.svg?height=300&width=300",
+      id: "cartoon",
+      name: "90's Cartoon",
+      image: "",
       color: "bg-green-500",
     },
     {
-      id: "minimalism",
-      name: "Minimalism",
-      image: "/placeholder.svg?height=300&width=300",
+      id: "disney",
+      name: "Disney Renaissance Style (90s Era)",
+      image: "",
       color: "bg-gray-500",
     },
     {
-      id: "pop-art",
-      name: "Pop Art",
-      image: "/placeholder.svg?height=300&width=300",
+      id: "comic",
+      name: "Comic",
+      image: "",
       color: "bg-pink-500",
     },
-    {
-      id: "abstract",
-      name: "Abstract",
-      image: "/placeholder.svg?height=300&width=300",
-      color: "bg-yellow-500",
-    },
-    {
-      id: "portrait",
-      name: "Portrait Photography",
-      image: "/placeholder.svg?height=300&width=300",
-      color: "bg-red-500",
-    },
-    {
-      id: "landscape",
-      name: "Landscape Photography",
-      image: "/placeholder.svg?height=300&width=300",
-      color: "bg-teal-500",
-    },
+    // {
+    //   id: "abstract",
+    //   name: "Abstract",
+    //   image: "/placeholder.svg?height=300&width=300",
+    //   color: "bg-yellow-500",
+    // },
+    // {
+    //   id: "portrait",
+    //   name: "Portrait Photography",
+    //   image: "/placeholder.svg?height=300&width=300",
+    //   color: "bg-red-500",
+    // },
+    // {
+    //   id: "landscape",
+    //   name: "Landscape Photography",
+    //   image: "/placeholder.svg?height=300&width=300",
+    //   color: "bg-teal-500",
+    // },
   ];
 
   const handleStyleSelect = (style: StyleOption) => {
@@ -101,7 +101,7 @@ export default function Home() {
       <header className="w-full bg-[rgb(83,101,88)] py-4 px-6 flex justify-between items-center z-50">
         <h1 className="text-3xl font-bold text-white">Sawar AI</h1>
 
-        <div className="flex items-center justify-center">
+        <div className="absolute left-1/2 transform -translate-x-1/2">
           <CreditsDialog />
         </div>
         <SettingsDialog />
@@ -116,7 +116,7 @@ export default function Home() {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -60, opacity: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className={`${selectedStyle.color} absolute top-0 left-0 right-0 z-30 py-4 flex justify-center items-center`}
+              className={`bg-[rgb(83,101,88)] absolute top-0 left-0 right-0 z-30 py-4 flex justify-center items-center`}
             >
               <h2 className="text-3xl font-bold text-white text-center">
                 {selectedStyle.name}
@@ -149,9 +149,18 @@ export default function Home() {
                         duration: 0.3,
                       },
                     }}
-                    className={`w-full cursor-pointer ${style.color} flex items-center`}
+                    className={`w-full cursor-pointer ${style.color} flex items-center relative`}
                     style={{
                       height: `calc(100% / ${styles.length})`,
+                      backgroundImage: style.image
+                        ? `url(${style.image})`
+                        : "none",
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                      backgroundBlendMode:  style.image
+                        ? "darken": "normal",
+                      backgroundColor: style.image
+                        ? "rgba(0, 0, 0, 0.5)": "", 
                     }}
                     whileHover={{
                       scale: 1.02,
@@ -205,6 +214,17 @@ export default function Home() {
                 },
               }}
               className={`${selectedStyle.color} w-full flex flex-col items-center justify-center absolute left-0 right-0 top-0 bottom-0`}
+              style={{
+                backgroundImage: selectedStyle.image
+                  ? `url(${selectedStyle.image})`
+                  : "none",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundBlendMode:  selectedStyle.image
+                  ? "darken": "normal",
+                backgroundColor: selectedStyle.image
+                  ? "rgba(0, 0, 0, 0.5)": "", 
+              }}
             >
               <AnimatePresence>
                 {showUpload && (

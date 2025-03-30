@@ -33,29 +33,29 @@ export default function Home() {
       color: "bg-blue-500",
     },
     {
-      id: "timBurton",
-      name: "Tim Burton Style",
-      image: "",
-      color: "bg-purple-500",
-    },
-    {
       id: "cartoon",
       name: "90's Cartoon",
-      image: "",
+      image: "/covers/cartoon.png",
       color: "bg-green-500",
     },
     {
       id: "disney",
       name: "Disney Renaissance Style (90s Era)",
-      image: "",
+      image: "/covers/disney.png",
       color: "bg-gray-500",
     },
     {
       id: "comic",
       name: "Comic",
-      image: "",
+      image: "/covers/comic.png",
       color: "bg-pink-500",
     },
+    // {
+    //   id: "timBurton",
+    //   name: "Tim Burton Style",
+    //   image: "",
+    //   color: "bg-purple-500",
+    // },
     // {
     //   id: "abstract",
     //   name: "Abstract",

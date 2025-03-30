@@ -2,9 +2,9 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Qamus AI",
-    short_name: "Qamus",
-    description: "An app to learn vocabulary using AI",
+    name: "Sawar AI",
+    short_name: "Sawar",
+    description: "An app to generate and alter images using AI.",
     start_url: "/",
     display: "standalone",
     background_color: "#ffffff",

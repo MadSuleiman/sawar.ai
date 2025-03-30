@@ -99,7 +99,7 @@ export default function Home() {
     <div className="w-full bg-gray-900 overflow-hidden h-screen relative flex flex-col">
       {/* Header */}
       <header className="w-full bg-[rgb(83,101,88)] py-4 px-6 flex justify-between items-center z-50">
-        <h1 className="text-xl font-bold text-white">Sawar AI</h1>
+        <h1 className="text-3xl font-bold text-white">Sawar AI</h1>
 
         <div className="flex items-center justify-center">
           <CreditsDialog />

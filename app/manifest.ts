@@ -7,7 +7,7 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "An app to generate and alter images using AI.",
     start_url: "/",
     display: "standalone",
-    background_color: "#ffffff",
+    background_color: "#536558",
     theme_color: "#000000",
     icons: [
       {

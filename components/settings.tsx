@@ -45,8 +45,8 @@ export function SettingsDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="ghost" size="icon" className="text-white">
-          <Settings className="h-10 w-10" />
+        <Button variant="ghost" className="text-white">
+          <Settings className="h-20 w-20" />
         </Button>
       </DialogTrigger>
       <DialogContent className="overflow-hidden p-0 md:max-h-[500px] md:max-w-[700px] lg:max-w-[800px]">

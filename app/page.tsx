@@ -157,10 +157,8 @@ export default function Home() {
                         : "none",
                       backgroundSize: "cover",
                       backgroundPosition: "center",
-                      backgroundBlendMode:  style.image
-                        ? "darken": "normal",
-                      backgroundColor: style.image
-                        ? "rgba(0, 0, 0, 0.5)": "", 
+                      backgroundBlendMode: style.image ? "darken" : "normal",
+                      backgroundColor: style.image ? "rgba(0, 0, 0, 0.5)" : "",
                     }}
                     whileHover={{
                       scale: 1.02,
@@ -220,10 +218,10 @@ export default function Home() {
                   : "none",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
-                backgroundBlendMode:  selectedStyle.image
-                  ? "darken": "normal",
+                backgroundBlendMode: selectedStyle.image ? "darken" : "normal",
                 backgroundColor: selectedStyle.image
-                  ? "rgba(0, 0, 0, 0.5)": "", 
+                  ? "rgba(0, 0, 0, 0.5)"
+                  : "",
               }}
             >
               <AnimatePresence>

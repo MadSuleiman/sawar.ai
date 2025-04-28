@@ -10,9 +10,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Upload, ArrowRight, ChevronRight, ChevronLeft } from "lucide-react";
-import { SettingsDialog } from "@/components/settings";
-import CreditsDialog from "@/components/credits";
+import { Upload, ArrowRight } from "lucide-react";
+import InfoDialog from "@/components/info";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 type StyleOption = {
   id: string;
@@ -24,6 +24,7 @@ type StyleOption = {
 export default function Home() {
   const [selectedStyle, setSelectedStyle] = useState<StyleOption | null>(null);
   const [showUpload, setShowUpload] = useState(false);
+  const [hoveredStyle, setHoveredStyle] = useState<string | null>(null);
 
   const styles: StyleOption[] = [
     {
@@ -53,25 +54,25 @@ export default function Home() {
     // {
     //   id: "timBurton",
     //   name: "Tim Burton Style",
-    //   image: "",
+    //   image: "/covers/comic.png",
     //   color: "bg-purple-500",
     // },
     // {
     //   id: "abstract",
     //   name: "Abstract",
-    //   image: "/placeholder.svg?height=300&width=300",
+    //   image: "/covers/comic.png",
     //   color: "bg-yellow-500",
     // },
     // {
     //   id: "portrait",
     //   name: "Portrait Photography",
-    //   image: "/placeholder.svg?height=300&width=300",
+    //   image: "/covers/comic.png",
     //   color: "bg-red-500",
     // },
     // {
     //   id: "landscape",
     //   name: "Landscape Photography",
-    //   image: "/placeholder.svg?height=300&width=300",
+    //   image: "/covers/comic.png",
     //   color: "bg-teal-500",
     // },
   ];
@@ -96,15 +97,12 @@ export default function Home() {
     : -1;
 
   return (
-    <div className="w-full bg-gray-900 overflow-hidden h-screen relative flex flex-col">
+    <ScrollArea className="w-full bg-gray-900 min-h-screen h-screen flex flex-col">
       {/* Header */}
-      <header className="w-full bg-[rgb(83,101,88)] py-4 px-6 flex justify-between items-center z-50">
+      <header className="w-full bg-[rgba(83,101,88)] py-4 px-6 flex justify-between items-center z-50 ">
         <h1 className="text-3xl font-bold text-white">Sawar AI</h1>
 
-        <div className="absolute left-1/2 transform -translate-x-1/2">
-          <CreditsDialog />
-        </div>
-        <SettingsDialog />
+        <InfoDialog />
       </header>
 
       <div className="relative z-10 flex-1">
@@ -132,58 +130,34 @@ export default function Home() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="w-full flex flex-col h-full"
+              className="h-full w-full overflow-y-auto no-scrollbar"
             >
-              {styles.map((style, index) => {
-                const isEven = index % 2 === 0;
-
-                return (
+              <div className="grid sm:grid-cols-1 md:grid-cols-2 l:grid-cols-3 xl:grid-cols-4 auto-rows-[33vh] w-full">
+                {styles.map((style) => (
                   <motion.div
                     key={style.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{
-                      opacity: 1,
-                      y: 0,
-                      transition: {
-                        delay: index * 0.05,
-                        duration: 0.3,
-                      },
-                    }}
-                    className={`w-full cursor-pointer ${style.color} flex items-center relative`}
+                    onMouseEnter={() => setHoveredStyle(style.id)}
+                    onMouseLeave={() => setHoveredStyle(null)}
+                    className={`relative overflow-hidden cursor-pointer flex items-center justify-center filter ${hoveredStyle && hoveredStyle !== style.id ? "blur-sm" : ""}`}
                     style={{
-                      height: `calc(100% / ${styles.length})`,
                       backgroundImage: style.image
                         ? `url(${style.image})`
-                        : "none",
+                        : undefined,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
-                      backgroundBlendMode: style.image ? "darken" : "normal",
-                      backgroundColor: style.image ? "rgba(0, 0, 0, 0.5)" : "",
-                    }}
-                    whileHover={{
-                      scale: 1.02,
-                      transition: { duration: 0.2 },
+                      backgroundBlendMode: style.image ? "darken" : undefined,
+                      backgroundColor: style.image
+                        ? "rgba(0,0,0,0.5)"
+                        : undefined,
                     }}
                     onClick={() => handleStyleSelect(style)}
                   >
-                    <div
-                      className={`container mx-auto flex ${isEven ? "justify-start" : "justify-end"} items-center`}
-                    >
-                      {!isEven && (
-                        <ChevronLeft className="h-8 w-8 text-white mr-4" />
-                      )}
-                      <h2
-                        className={`text-2xl md:text-3xl font-bold text-white ${isEven ? "text-left mr-4 ml-4 " : "text-right ml-4 mr-4"}`}
-                      >
-                        {style.name}
-                      </h2>
-                      {isEven && (
-                        <ChevronRight className="h-8 w-8 text-white ml-4" />
-                      )}
-                    </div>
+                    <span className="z-10 text-white font-bold text-lg text-center px-2">
+                      {style.name}
+                    </span>
                   </motion.div>
-                );
-              })}
+                ))}
+              </div>
             </motion.div>
           ) : (
             <motion.div
@@ -211,7 +185,7 @@ export default function Home() {
                   ease: [0.22, 1, 0.36, 1],
                 },
               }}
-              className={`${selectedStyle.color} w-full flex flex-col items-center justify-center absolute left-0 right-0 top-0 bottom-0`}
+              className={`${selectedStyle.color} w-full flex flex-col items-center justify-center min-h-screen h-screen`}
               style={{
                 backgroundImage: selectedStyle.image
                   ? `url(${selectedStyle.image})`
@@ -284,6 +258,6 @@ export default function Home() {
           )}
         </AnimatePresence>
       </div>
-    </div>
+    </ScrollArea>
   );
 }

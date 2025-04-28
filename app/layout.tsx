@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Sawar Ai",
+  title: "Sawar AI",
   description: "An app to generate and alter images using AI.",
   icons: {
     icon: [
